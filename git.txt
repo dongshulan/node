@@ -1,0 +1,171 @@
+git	->工具，版本控制
+github	->网站，社交平台，开源项目，远程仓库
+
+svn与git区别：
+	svn集成式的方式
+	git分布式的方式
+	github的作用
+
+github官网：http://github.com
+
+下载git
+
+在github注册，创建一个项目
+
+克隆到本地：git clone url地址
+
+git的三个区：
+	工作区：
+	暂存区：作为过渡层；避免误操作；保护工作区和版本区；分支处理
+	版本区：
+
+----------------------------------------------------------------------------
+git命令：
+
+	git config --global user.name "dongshulan"		名字
+	git config --global user.email "984925816@qq.com"	e-mail
+	git config --list	查看全部
+	
+	查看当前账户名字：git config --global user.name 
+
+	查看当前账户email：git config --global user.email
+
+	git status	查看当前状态
+	
+	克隆整个版本：git clone	地址
+	
+	添加文件到暂存区：git add 文件名	
+
+	暂存区添加文件到版本区：git commit
+
+	提交已经修改的文件：git add .
+	
+	暂存区添加文件到版本区修改的文件：git commit -m "说明"
+	
+	工作区添加到缓存区再添加到版本区：git commit -a -m "说明"
+
+	查看提交历史：git log
+
+	对比：
+
+	工作区与暂存区的对比：git diff
+
+	暂存区与版本区的对比：git diff --cached		git diff --staged
+	
+	工作区与版本区的对比：git diff master
+
+	撤回：
+
+	暂存区撤回工作区：git reset HEAD 文件名
+
+	工作区撤回版本区状态：git checkout -- 文件名（-- 前后有空格）
+
+	误提交后，撤销到上一次的再进行提交操作：git commit -m "说明" --amend
+
+	删除：
+	
+	工作区没有，暂存区有的文件 删除：git rm 文件名
+	
+	工作区和暂存区都有文件，都删除：git rm -f 文件名
+
+	工作区和暂存区都有文件，只删除暂存区：git rm --cached 文件名
+	
+	恢复：
+	
+	还原工作区指定版本的指定文件：git checkout 版本号（git log查看）文件名
+	
+	还原指定版本（版本，不是文件）：git reset --hard 版本号（git log查看）
+	
+	    过去的某一个版本：git reset --hard head^ (回到上一个版本)
+			git reset --hard head~2（回到上两个版本）
+	
+	回到当前版本：git reflog
+
+
+		
+
+	
+
+
+	查看远程仓库名字：git remote
+
+	查看远程仓库名字的地址：git remote -v
+
+	同步到远程仓库：git push 仓库名字 分支名字 （主分支master）
+
+	同步更新代码(多人协作解决冲突)：
+		
+		git fetch(不自动合并)
+			
+			git diff origin/master(查看不同)
+				
+			git merge origin/marter(合并不同)
+
+		git pull(自动合并同步)
+
+	
+
+
+	查看分支：git branch
+
+	建立分支：git branch 分支名字
+
+	切换分支：git checkout 分支名字
+
+	建立并切换到该分支：git checkout -b 分支名字
+
+	快速合并：git merge 要合并的分支名字
+
+	查看合并的分支：git branch --merged
+	
+	查看没有合并的分支：git branch --no-merged
+
+	（已经合并的分支可以删除，没有合并的删除不了）删除分支：git branch -d 分支名字
+
+	（删除没有合并的分支）：git branch -D 分支名字
+
+	有冲突的文件合并：
+		
+	git branch 要合并的分支名字
+
+	git status 查看状态-------在WS手动更改冲突分支
+
+	git commit -a -m "" 重新提交
+
+	合并完成
+
+	
+	
+	新建版本：git tag 版本名（如：v1.0）
+
+	查看当前版本：git tag
+
+	上传版本：git push origin 版本名
+
+	
+
+	创建博客：说明：https://pages.github.com/
+
+	步骤：创建仓库，要和前面的名字相同 如：dongshulan.github.io
+	
+
+	
+------------------------------------------------------------------------------------
+
+	查看目录结构：tree
+
+	到上一级：cd ..
+
+	新建文件夹：mkdir 文件夹名字
+
+	新建记事本：notepad 文件名
+	
+	设置别名：git config --global alias.co checkout	(checkout的别名为co)
+	
+	
+
+
+git教程：http://git.oschina.net/progit/
+
+	http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000/	
+	
