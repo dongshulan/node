@@ -1,0 +1,403 @@
+angular
+git
+grunt
+gulp
+--------------------------
+angular: 框架、库   —— 必须放到服务器环境下
+	一个mvc的库
+
+	m	model	数据
+	v	view	视图
+	c	controller 控制器
+
+	mvc现在衍生出很多叫法：
+		mvp
+		mvvm
+		mv*
+		...
+
+	一个mvvm的库
+
+	被谷歌在推
+
+	* 致力于解决ajax开发所带来痛苦
+		数据解析、DOM操作
+
+
+	官网：http://angularjs.org/
+
+	手册：http://docs.angularjs.cn/api
+
+之前编写程序：
+	面向过程:
+	面向对象：
+	面向数据：
+-----------------------------------------
+库的版本：
+jquery 
+	1.x.x	兼容
+	2.x.x	不兼容低版本IE
+
+	主版本.次版本.修订号
+	1.7.2
+	1.7.3
+
+	1.8.2
+
+	2.1.1
+
+angular 版本：
+	1.2.x 之前版本
+
+	1.3.x 之后的版本
+		1.3.10	√
+		1.4.2
+		
+
+
+	2.x.x	全新版本，完全一个新的库
+------------------------------------
+引入文件
+------------------------------------
+使用基本功能：
+
+	angular.bind(this指向谁,函数名,参数1，参数2...)  改变this指向
+	angular.bootstrap()		手动开启angular应用模式
+	angular.copy(克隆谁,克隆到哪去)	克隆数组、json
+	angular.element(元素)		angular里面元素操作
+			小型的jquery
+
+			angular元素
+	angular.equals(a,b)		比较东西是否相等
+		NaN和NaN相等
+	angular.forEach()		循环
+	angular.isArray()		判断是否是数组
+	angular.isDate()		判断是否是日期
+	
+	angular.lowercase()		转小写
+
+	angular.module()		模块化开发
+------------------------------------
+css：
+	.zns-red{}
+	.zns-blue{}
+js:
+	var WEB={};
+	WEB.util={};
+
+angular-> 命名空间
+
+	ng-  
+------------------------------------
+前端模板：
+	{$name}
+	{{name}}
+
+数据：
+	input类， 天生放数据
+
+	ng-model="name"
+
+展示数据：
+	{{name}}
+	ng-bind="name"	   程序出错，不会显示模板标记
+
+ng-app： 开启了angular应用模式， 管辖范围
+
+	* 一个页面里面，只能出现一次
+
+	* 建议大家，ng-app加给html标签
+--------------------------------------
+指令(directive)：扩展html语法
+
+	ng-model=""
+	ng-bind=""
+	ng-app
+
+ng-init		初始化数据
+	ng-init="a=12"
+	ng-init="a=['apple','banana','pear']"
+
+ng-show="true/false"   显示
+ng-hide="true/false"   隐藏
+
+ng-click=""   点击
+ng-mouseover="" 
+	.....
+
+ng-repeat=""   循环
+---------------------------------------
+angular特色：
+	双向数据绑定、依赖注入
+
+	依赖注入：函数传参名字定死，跟顺序无关
+
+---------------------------------------
+angular控制器：
+	a). 版本在 1.2.x之前
+		function show($scope){}
+
+		<div ng-controller="show">
+	b). 模块化
+		先创建一个模块:
+			var mk=angular.module('mk',[]);
+		在模块里面创建一个控制器:
+			mk.controller(控制器名称,fnCb);
+
+		<div ng-controller="show">
+
+多个控制器之间：
+	a).可以继承
+
+	b).数据如何传递
+		子级给父级传递：
+			$scope.$emit(数据名称,数据);
+		父级给子级传递：
+			$scope.$boradcast(数据名称,数据);
+		接收数据:
+			$scope.$on(数据名称,function(event,data){data});
+--------------------------------------------
+* 一切都是数据
+--------------------------------------------
+数据更改了，但是视图没有修改：
+	数据的脏检查：
+		
+		$scope.$apply();
+--------------------------------------------
+服务-service:
+	$scope
+	$timeout
+	$interval
+--------------------------------------------
+简易留言板：
+
+简易购物车：
+--------------------------------------------
+过滤器：filter
+	应用在模板里面
+
+	{{data|过滤器名称}}
+	{data|过滤器名称:参数}}
+
+		currency    货币
+		date	    时间
+			date:'yyyy-MM-dd hh:mm:ss'
+		filter	    过滤
+		limitTo	    限制
+			limitTo:3
+		lowercase	小写
+		uppercase	大写
+		number		数字转化
+		orderBy		排序
+
+	自定义自己过滤器：
+		首字母大写
+		星期几
+------------------------------------------------
+指令:directive  扩展html语法
+
+		html-> 标签、属性
+
+	自带很多指令：
+		ng-model=""
+		ng-init=""
+		ng-bind=""
+		ng-click=""
+		....
+
+	ng-red
+
+自定义指令：angular里面唯一操作DOM地址
+	app.directive(指令名,function(){
+		return function(scope,element,attr){
+
+		}
+	});
+	-------------------------------------
+	return {
+		link:function(scope,element,attr){
+
+		},
+		restrict:'ECMA'，
+		template:''   模板
+		templateUrl:	模板地址
+		replace:true	替换
+		transclude:true  包裹之前的代码
+	}
+
+	E -> element  元素
+	A -> attribute 属性
+	C -> css	样式
+	M -> comment    注释
+		必须配合replace
+
+	模板：
+		a). 直接单独文件
+		b). script:text/ng-tempalte id
+------------------------------------------------
+控制器
+过滤器
+指令
+
+angular.module('app',[],配置函数)
+
+	控制器：
+		a). app.controller()   模块里面
+		b). 配置函数
+			$controllerProvider
+	过滤器:
+		a). app.filter()   模块里面
+		b). 配置函数
+			$filterProvider
+	指令:
+		a). app.directive()  模块里面
+		b). 配置函数
+			$compileProvider
+
+* 配置函数里面注入的 provider
+* 控制器里面注入 service
+	$scope  $timeout $interval
+-----------------------------------
+自定义服务：
+	配置函数：
+		$provide.factory('factoryService',function(){  √
+			return {a:1,b:2};
+		});
+
+		$provide.service('service',function(){  //构造模式
+			this.a=1;
+			this.b=2;
+		});
+		
+		$provide.provider('service2',function(){
+			this.$get=function(){
+	    			return {a:1,b:2};
+			};
+		});
+
+		$provide.value(name,value)
+				随时修改
+				只能注入到controller里面
+		$provide.constant(name,value)	√
+				常量，定义好了不能修改了
+				可以注入到任何地方
+	模块里面：
+		app.factory()
+		app.value()
+		app.constant()
+		app.service()
+		app.provider()
+
+
+		运行配置：
+			app.config();	√
+			app.run()
+		
+			在控制器之前执行
+-----------------------------------
+mvc框架： m 数据 -> 交互
+
+angular如何做交互？
+
+	$http
+
+	$http.get(url).success(function(data){}).error();
+
+	* angular交互，后台数据一定要是一个标准数据
+
+	$http.get(url,{parmas:{a:1,b:2}}).success(function(data){}).error();
+
+	
+ng-class=""
+
+	ng-class="{class1:true,class2:true}"
+------------------------------------------------
+
+	跨域取数据：
+	https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&cb=show
+
+	$http.jsonp(url).success();
+
+		JSON_CALLBACK
+------------------------------------------------			
+a  -> b
+
+监听数据变化：
+	$scope.$watch(哪个数据,fnCb)  -> 基本类型
+
+
+	$scope.$watch(哪个数据,fnCb,是否深度监视) -> 监听对象发生变化
+------------------------------------------------
+移动端开发——
+
+公共东西：提取出来
+
+	ng-include="'header.html'"
+
+	ng-include src="'header.html'"
+
+SPA:  single page application 单页面应用
+
+路由问题：
+	路由——告诉你该去哪里
+
+	引入路由js
+
+	模块依赖 ngRoute
+
+	<div ng-view></div>
+
+	app.config(function($routeProvider){
+		$routeProvider.when(路径,{
+			templateUrl:
+			controller:
+		}).when().otherwise({})
+	});
+
+angular编写之前任意一个网站
+-----------------------------------
+
+
+	
+
+	
+	
+		
+		
+	
+	
+	
+	
+
+
+
+	
+
+
+
+	
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
